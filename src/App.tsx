@@ -1,24 +1,65 @@
+import { Box } from '@mui/system';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Day from './components/Day';
 
 function App() {
+  const weekDays = [
+    {
+      name: 'Monday',
+      timeSpans: []
+    },
+    {
+      name: 'Tuesday',
+      timeSpans: []
+    },
+    {
+      name: 'Wednesday',
+      timeSpans: []
+    },
+    {
+      name: 'Thursday',
+      timeSpans: []
+    },
+    {
+      name: 'Friday',
+      timeSpans: []
+    },
+    {
+      name: 'Saturday',
+      timeSpans: []
+    },
+    {
+      name: 'Sunday',
+      timeSpans: [
+        {
+          start: {
+            hours: 6,
+            minutes: 0
+          },
+          end: {
+            hours: 12,
+            minutes: 0
+          }
+        },
+        {
+          start: {
+            hours: 18,
+            minutes: 0
+          },
+          end: {
+            hours: 19,
+            minutes: 15
+          }
+        }
+      ]
+    },
+  ]
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Box sx={{ margin: '0 128px' }}>
+        {weekDays.map(weekDay => <Day {...weekDay} />)}
+      </Box>
     </div>
   );
 }
