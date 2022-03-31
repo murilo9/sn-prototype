@@ -11,19 +11,18 @@ type DayProps = {
 
 export default function Day({ name, timeSpans }: DayProps) {
   return <>
-    <Box>
+    <Box sx={{ backgroundColor: '#f2fcfc', }}>
       <Typography variant='overline' sx={{ width: '48px', display: 'inline-block' }}>
         {name.substring(0, 3).toUpperCase()}
       </Typography>
       <Box sx={{
-        borderLeft: '1px solid red',
-        borderRight: '1px solid red',
         display: 'inline-block',
         width: 'calc(100% - 48px)',
         boxSizing: 'border-box',
         position: 'relative',
-        height: '16px',
-        cursor: 'pointer'
+        height: '20px',
+        cursor: 'pointer',
+        pt: 1
       }}>
         {timeSpans.map(timeSpan => <TimeSpan {...timeSpan} />)}
       </Box>
