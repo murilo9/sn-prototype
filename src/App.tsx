@@ -2,6 +2,7 @@ import { Divider } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import Day from './components/Day';
+import TimeLabel from './components/TimeLabel';
 
 function App() {
   const weekDays = [
@@ -100,8 +101,8 @@ function App() {
             minutes: 0
           },
           end: {
-            hours: 19,
-            minutes: 15
+            hours: 23,
+            minutes: 59
           }
         }
       ]
@@ -111,10 +112,17 @@ function App() {
   return (
     <div className="App">
       <Box sx={{ margin: '0 128px' }}>
+        <Box sx={{ marginLeft: '80px', position: 'relative', height: '24px', my: 1 }}>
+          <TimeLabel label="6:00" left="0" />
+          <TimeLabel label="12:00" left="calc(33.33% - 24px)" />
+          <TimeLabel label="18:00" left="calc(66.66% - 24px)" />
+          <TimeLabel label="00:00" left="calc(100% - 48px)" />
+        </Box>
         {weekDays.map((weekDay, index) => <>
           {index !== 0 ? <Divider></Divider> : null}
           <Day {...weekDay} />
         </>)}
+
       </Box>
     </div>
   );

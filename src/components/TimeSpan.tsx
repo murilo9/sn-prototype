@@ -35,8 +35,10 @@ export default function TimeSpan({ start, end, id, description }: TimeSpanProps)
         className="time-bar"
         sx={{
           position: 'absolute',
+          cursor: 'pointer',
           left: getPercent(startSecs),
           width: getPercent(endSecs),
+          top: '8px',
           height: '16px',
           backgroundColor: '#9de0dd',
           borderRadius: '4px'
