@@ -8,10 +8,11 @@ import TimeSpanData from '../types/TimeSpan'
 import './TimeSpan.css'
 
 interface TimeSpanProps extends TimeSpanData {
-  active: boolean
+  active: boolean,
+  dayName: string
 }
 
-export default function TimeSpan({ start, end, id, description, active }: TimeSpanProps) {
+export default function TimeSpan({ start, end, id, description, active, dayName }: TimeSpanProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [typingMessage, setTypingMessage] = useState(false)
 
@@ -63,15 +64,19 @@ export default function TimeSpan({ start, end, id, description, active }: TimeSp
       }}
       sx={{ mt: 1 }}
     >
-      <Card sx={{ minWidth: '280px' }}>
+      <Card sx={{ minWidth: '280px', maxWidth: '340px' }}>
         <CardContent>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="h6" sx={{ textAlign: 'center' }}>{timeTitle}</Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <Box>
+              <Typography variant="h6" sx={{ textAlign: 'center' }}>{timeTitle}</Typography>
+              <Typography variant="caption" sx={{ position: 'relative', bottom: '4px' }}>{dayName}</Typography>
+            </Box>
             <IconButton sx={{ ml: 2 }} onClick={handleClose}>
               <Close fontSize="inherit" />
             </IconButton>
           </Box>
-          <Typography fontSize={14} sx={{ mt: 2 }} color="text.secondary">
+
+          <Typography fontSize={14} sx={{ mt: 2, px: 1 }} color="text.secondary" >
             {description || <Box sx={{ textAlign: 'center', fontWeight: 'light' }}><i>No description</i></Box>}
           </Typography>
           {

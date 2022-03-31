@@ -1,4 +1,4 @@
-import { Box, Checkbox, Switch, Typography } from '@mui/material'
+import { Box, Switch, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import TimeSpanProps from '../types/TimeSpan'
 import './Day.css'
@@ -27,7 +27,7 @@ export default function Day({ name, timeSpans }: DayProps) {
         <Box sx={{ borderLeft: '1px solid rgba(128,128,128,0.1)', display: 'inline-block', boxSizing: 'border-box', width: '33.33%', height: '100%' }}></Box>
         <Box sx={{ borderLeft: '1px solid rgba(128,128,128,0.1)', display: 'inline-block', boxSizing: 'border-box', width: '33.33%', height: '100%' }}></Box>
         <Box sx={{ borderLeft: '1px solid rgba(128,128,128,0.1)', display: 'inline-block', boxSizing: 'border-box', width: '33.33%', height: '100%' }}></Box>
-        {timeSpans.map(timeSpan => <TimeSpan {...timeSpan} active={active} />)}
+        {timeSpans.map(timeSpan => <TimeSpan {...timeSpan} active={active} dayName={name} />)}
       </Box>
     </Box>
   </>

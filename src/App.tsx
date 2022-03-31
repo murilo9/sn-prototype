@@ -92,7 +92,7 @@ function App() {
             hours: 12,
             minutes: 0
           },
-          description: "This is a time span description."
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a rhoncus metus, a fermentum risus. Aenean mollis ex ut neque eleifend dapibus. Cras id finibus odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         },
         {
           id: '5',
