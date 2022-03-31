@@ -11,7 +11,7 @@ export default function TimeSpan({ start, end, id, description }: TimeSpanProps)
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [typingMessage, setTypingMessage] = useState(false)
 
-  const startSecs = getSecsBetweenTimes(0, 0, start.hours, start.minutes)
+  const startSecs = getSecsBetweenTimes(6, 0, start.hours, start.minutes)
   const endSecs = getSecsBetweenTimes(start.hours, start.minutes, end.hours, end.minutes)
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
