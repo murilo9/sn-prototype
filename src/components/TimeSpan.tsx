@@ -4,10 +4,14 @@ import React, { useState } from 'react'
 import formatTime from '../helpers/formatTime'
 import getPercent from '../helpers/getPercent'
 import getSecsBetweenTimes from '../helpers/getSecondsBetweenTimes'
-import TimeSpanProps from '../types/TimeSpan'
+import TimeSpanData from '../types/TimeSpan'
 import './TimeSpan.css'
 
-export default function TimeSpan({ start, end, id, description }: TimeSpanProps) {
+interface TimeSpanProps extends TimeSpanData {
+  active: boolean
+}
+
+export default function TimeSpan({ start, end, id, description, active }: TimeSpanProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [typingMessage, setTypingMessage] = useState(false)
 
@@ -40,12 +44,14 @@ export default function TimeSpan({ start, end, id, description }: TimeSpanProps)
           width: getPercent(endSecs),
           top: '8px',
           height: '16px',
-          backgroundColor: '#9de0dd',
+          backgroundColor: active ? '#9de0dd' : 'rgba(128,128,128,0.1)',
           borderRadius: '4px'
         }}>
         <div aria-describedby={popoverId} onClick={event => handleClick(event)} style={{ width: '100%', height: '100%' }}></div>
       </Box>
     </Tooltip>
+
+    { /* Modal */}
     <Popover
       id={popoverId}
       open={open}

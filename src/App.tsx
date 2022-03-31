@@ -112,8 +112,8 @@ function App() {
   return (
     <div className="App">
       <Box sx={{ margin: '0 128px' }}>
-        <Box sx={{ marginLeft: '80px', position: 'relative', height: '24px', my: 1 }}>
-          <TimeLabel label="6:00" left="0" />
+        <Box sx={{ marginLeft: '120px', position: 'relative', height: '24px', my: 1 }}>
+          <TimeLabel label="6:00" left="-24px" />
           <TimeLabel label="12:00" left="calc(33.33% - 24px)" />
           <TimeLabel label="18:00" left="calc(66.66% - 24px)" />
           <TimeLabel label="00:00" left="calc(100% - 48px)" />
