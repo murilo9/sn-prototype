@@ -24,9 +24,10 @@ function App() {
     Number(timeString.split(':')[0] + timeString.split(':')[1])
 
   const handleAddTimespan = () => {
-    if (!error) {
+    const rawFromTimeNumericValue = getNumericTimeValue(fromTime)
+    const rawToTimeNumericValue = getNumericTimeValue(toTime)
+    if (validateTimespan(rawFromTimeNumericValue, rawToTimeNumericValue)) {
       const timespan = buildTimeSpan()
-      console.log(timespan)
       const updatedWeekDays = { ...weekDays }
       updatedWeekDays[addTimespanWeekday].push(timespan)
       setWeekDays(updatedWeekDays)
@@ -52,16 +53,43 @@ function App() {
     }
   }
 
+  const getMinutesString = (minutesNumber: number) => minutesNumber > 9 ? minutesNumber.toString() : '0' + minutesNumber.toString()
+
+  const detectConflictBetweenRanges = (startTime1: number, endTime1: number) => {
+    const dayTimeSpans = weekDays[addTimespanWeekday]
+    let startTime2: number
+    let endTime2: number
+    let doesConflict = false
+    dayTimeSpans.forEach(timeSpan => {
+      startTime2 = Number(timeSpan.start.hours.toString() + getMinutesString(timeSpan.start.minutes))
+      endTime2 = Number(timeSpan.end.hours.toString() + getMinutesString(timeSpan.end.minutes))
+      if (startTime1 <= endTime2 && endTime1 >= startTime2) {
+        console.log('conflict', startTime1, endTime2, endTime1, startTime2)
+        doesConflict = true
+      }
+    })
+    return doesConflict
+  }
+
   const validateTimespan = (rawFromTimeNumericValue: number, rawToTimeNumericValue: number) => {
     if (rawFromTimeNumericValue > rawToTimeNumericValue) {
       setError('Please enter a valid time span.')
+      return false
     }
-    else if (rawToTimeNumericValue - rawFromTimeNumericValue < MINIMUM_TIMESPAN_MINS) {
+    if (rawToTimeNumericValue - rawFromTimeNumericValue < MINIMUM_TIMESPAN_MINS) {
       setError('Time spans must be at least 15 min long.')
+      return false
     }
-    else {
-      setError('')
+    if (detectConflictBetweenRanges(rawFromTimeNumericValue, rawToTimeNumericValue)) {
+      setError('Please input a non-conflicting time span.')
+      return false
     }
+    if (rawFromTimeNumericValue < 600) {
+      setError('Time span must be between 6:00 and 00:00.')
+      return false
+    }
+    setError('')
+    return true
   }
 
   const handleFromTimeChange = (event: any) => {
