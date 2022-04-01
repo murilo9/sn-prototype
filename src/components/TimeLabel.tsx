@@ -10,7 +10,8 @@ export default function TimeLabel({ label, left }: TimeLabelProps) {
   return <>
     <Typography sx={{
       position: 'absolute', left, top: 0, width: '48px', textAlign: 'center'
-    }}>
+    }}
+      variant="subtitle2">
       {label}
     </Typography>
   </>

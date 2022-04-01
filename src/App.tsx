@@ -1,10 +1,13 @@
-import { Divider } from '@mui/material';
+import { Divider, FormControlLabel, Paper, Switch } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
 import Day from './components/Day';
 import TimeLabel from './components/TimeLabel';
 
 function App() {
+  const [isOwner, setIsOwner] = useState(false)
+  const [showAddTimespanDialog, setShowAddTimespanDialog] = useState(false)
+
   const weekDays = [
     {
       name: 'Monday',
@@ -111,18 +114,24 @@ function App() {
 
   return (
     <div className="App">
-      <Box sx={{ margin: '0 128px' }}>
-        <Box sx={{ marginLeft: '120px', position: 'relative', height: '24px', my: 1 }}>
-          <TimeLabel label="6:00" left="-24px" />
-          <TimeLabel label="12:00" left="calc(33.33% - 24px)" />
-          <TimeLabel label="18:00" left="calc(66.66% - 24px)" />
-          <TimeLabel label="00:00" left="calc(100% - 48px)" />
-        </Box>
-        {weekDays.map((weekDay, index) => <>
-          {index !== 0 ? <Divider></Divider> : null}
-          <Day {...weekDay} />
-        </>)}
+      <Box sx={{ px: 2 }}>
+        <FormControlLabel control={
+          <Switch onChange={() => setIsOwner(!isOwner)} />
+        } label={isOwner ? 'My own availiability' : "Someone else's availability"} />
 
+        <Paper sx={{ maxWidth: '768px', margin: '48px auto', py: 2, pl: 2, pr: 6 }}>
+          <Box sx={{ marginLeft: '120px', position: 'relative', height: '24px', my: 1 }}>
+            <TimeLabel label="6:00" left="-24px" />
+            <TimeLabel label="12:00" left="calc(33.33% - 24px)" />
+            <TimeLabel label="18:00" left="calc(66.66% - 24px)" />
+            <TimeLabel label="00:00" left="calc(100% - 24px)" />
+          </Box>
+          {weekDays.map((weekDay, index) => <>
+            {index !== 0 ? <Divider></Divider> : null}
+            <Day {...weekDay} isOwner={isOwner} showAddTimespanDialog={showAddTimespanDialog} setShowAddTimespanDialog={setShowAddTimespanDialog} />
+          </>)}
+
+        </Paper>
       </Box>
     </div>
   );

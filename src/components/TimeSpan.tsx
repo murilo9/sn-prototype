@@ -76,8 +76,8 @@ export default function TimeSpan({ start, end, id, description, active, dayName 
             </IconButton>
           </Box>
 
-          <Typography fontSize={14} sx={{ mt: 2, px: 1 }} color="text.secondary" >
-            {description || <Box sx={{ textAlign: 'center', fontWeight: 'light' }}><i>No description</i></Box>}
+          <Typography fontSize={14} sx={{ mt: 2, px: 1, fontWeight: description ? '400' : '100', textAlign: description ? 'left' : 'center' }} color="text.secondary" >
+            {description || <i>No description</i>}
           </Typography>
           {
             typingMessage ?
