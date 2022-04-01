@@ -9,21 +9,17 @@ type DayProps = {
   name: string,
   timeSpans: TimeSpanProps[],
   isOwner: boolean,
-  showAddTimespanDialog: boolean,
+  setShowAddQuestionDialog: (value: boolean) => void,
   setShowAddTimespanDialog: (value: boolean) => void
 }
 
-export default function Day({ name, timeSpans, isOwner }: DayProps) {
+export default function Day({ name, timeSpans, isOwner, setShowAddTimespanDialog, setShowAddQuestionDialog }: DayProps) {
   const [active, setActive] = useState(true)
   const [showOptions, setShowOptions] = useState(false)
 
   const handleAddMessageClick = () => {
 
   };
-
-  const handleAddTimespanClick = () => {
-
-  }
 
   return <>
     <div onMouseEnter={() => setShowOptions(true)} onMouseLeave={() => setShowOptions(false)} onClick={() => setShowOptions(false)}>
@@ -47,11 +43,11 @@ export default function Day({ name, timeSpans, isOwner }: DayProps) {
         <Box sx={{ display: showOptions ? 'block' : 'none', position: 'absolute', right: '-48px' }}>
           {
             isOwner ?
-              <IconButton size="small" sx={{ mx: 1 }} onClick={handleAddTimespanClick} color="primary">
+              <IconButton size="small" sx={{ mx: 1 }} onClick={() => setShowAddTimespanDialog(true)} color="primary">
                 <MoreTimeOutlined />
               </IconButton>
               :
-              <IconButton size="small" sx={{ mx: 1 }} onClick={handleAddMessageClick} color="primary">
+              <IconButton size="small" sx={{ mx: 1 }} onClick={() => setShowAddQuestionDialog(true)} color="primary">
                 <AddComment />
               </IconButton>
           }

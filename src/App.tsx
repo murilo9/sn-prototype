@@ -1,4 +1,6 @@
-import { Divider, FormControlLabel, Paper, Switch } from '@mui/material';
+import { Close } from '@mui/icons-material';
+import { Avatar, Button, Card, CardActions, CardContent, Dialog, DialogTitle, Divider, FormControlLabel, IconButton, List, ListItem, ListItemAvatar, ListItemText, Paper, Switch, TextField, Typography } from '@mui/material';
+import { blue } from '@mui/material/colors';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import Day from './components/Day';
@@ -7,6 +9,7 @@ import TimeLabel from './components/TimeLabel';
 function App() {
   const [isOwner, setIsOwner] = useState(false)
   const [showAddTimespanDialog, setShowAddTimespanDialog] = useState(false)
+  const [showAddQuestionDialog, setShowAddQuestionDialog] = useState(false)
 
   const weekDays = [
     {
@@ -128,11 +131,37 @@ function App() {
           </Box>
           {weekDays.map((weekDay, index) => <>
             {index !== 0 ? <Divider></Divider> : null}
-            <Day {...weekDay} isOwner={isOwner} showAddTimespanDialog={showAddTimespanDialog} setShowAddTimespanDialog={setShowAddTimespanDialog} />
+            <Day {...weekDay} isOwner={isOwner} setShowAddQuestionDialog={setShowAddQuestionDialog} setShowAddTimespanDialog={setShowAddTimespanDialog} />
           </>)}
 
         </Paper>
       </Box>
+
+      <Dialog onClose={() => setShowAddQuestionDialog(false)} open={showAddQuestionDialog}>
+        <Card sx={{ width: '340px' }}>
+          <CardContent>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <Box>
+                <Typography variant='h6'>
+                  Wednesday
+                </Typography>
+                <Typography variant='caption'>
+                  Someone Else
+                </Typography>
+              </Box>
+              <IconButton>
+                <Close />
+              </IconButton>
+            </Box>
+            <TextField multiline rows={4} fullWidth label="Ask something about the day" autoFocus sx={{ mt: 2 }} />
+          </CardContent>
+          <Divider />
+          <CardActions sx={{ justifyContent: 'flex-end' }}>
+            <Button color="error" onClick={() => setShowAddQuestionDialog(false)}>Cancel</Button>
+            <Button onClick={() => setShowAddQuestionDialog(false)}>Ask</Button>
+          </CardActions>
+        </Card>
+      </Dialog>
     </div>
   );
 }
