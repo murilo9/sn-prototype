@@ -108,6 +108,15 @@ function App() {
     validateTimespan(rawFromTimeNumericValue, rawToTimeNumericValue)
   }
 
+  const deleteTimespan = (id: string, weekDay: string) => {
+    const updatedWeekDays = { ...weekDays }
+    const index = updatedWeekDays[weekDay].findIndex(timespan => timespan.id === id)
+    if (index >= 0) {
+      updatedWeekDays[weekDay].splice(index, 1)
+      setWeekDays(updatedWeekDays)
+    }
+  }
+
   return (
     <div className="App">
       <Box sx={{ px: 2 }}>
@@ -133,6 +142,7 @@ function App() {
                   setShowAddQuestionDialog={setShowAddQuestionDialog}
                   setShowAddTimespanDialog={setShowAddTimespanDialog}
                   setAddTimespanWeekday={setAddTimespanWeekday}
+                  deleteTimespan={deleteTimespan}
                   key={key}
                 />
               </>

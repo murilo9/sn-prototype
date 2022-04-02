@@ -10,10 +10,11 @@ type DayProps = {
   isOwner: boolean,
   setShowAddQuestionDialog: (value: boolean) => void,
   setShowAddTimespanDialog: (value: boolean) => void,
-  setAddTimespanWeekday: (value: string) => void
+  setAddTimespanWeekday: (value: string) => void,
+  deleteTimespan: (id: string, weekDay: string) => void
 }
 
-export default function Day({ name, timeSpans, isOwner, setShowAddTimespanDialog, setShowAddQuestionDialog, setAddTimespanWeekday }: DayProps) {
+export default function Day({ name, timeSpans, isOwner, setShowAddTimespanDialog, setShowAddQuestionDialog, setAddTimespanWeekday, deleteTimespan }: DayProps) {
   const [active, setActive] = useState(true)
   const [showOptions, setShowOptions] = useState(false)
 
@@ -43,7 +44,7 @@ export default function Day({ name, timeSpans, isOwner, setShowAddTimespanDialog
           <Box sx={{ borderLeft: '1px solid rgba(128,128,128,0.1)', display: 'inline-block', boxSizing: 'border-box', width: '33.33%', height: '100%' }}></Box>
           <Box sx={{ borderLeft: '1px solid rgba(128,128,128,0.1)', borderRight: '1px solid rgba(128,128,128,0.1)', display: 'inline-block', boxSizing: 'border-box', width: '33.33%', height: '100%' }}></Box>
 
-          {timeSpans.map(timeSpan => <TimeSpan {...timeSpan} active={active} dayName={name} key={timeSpan.id} />)}
+          {timeSpans.map(timeSpan => <TimeSpan {...timeSpan} active={active} dayName={name} key={timeSpan.id} isOwner={isOwner} deleteTimespan={deleteTimespan} />)}
         </Box>
         <Box sx={{ display: showOptions ? 'block' : 'none', position: 'absolute', right: '-48px' }}>
           {

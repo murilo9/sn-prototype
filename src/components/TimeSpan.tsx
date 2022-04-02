@@ -9,10 +9,12 @@ import './TimeSpan.css'
 
 interface TimeSpanProps extends TimeSpanData {
   active: boolean,
-  dayName: string
+  dayName: string,
+  isOwner: boolean,
+  deleteTimespan: (id: string, weekDay: string) => void
 }
 
-export default function TimeSpan({ start, end, id, description, active, dayName }: TimeSpanProps) {
+export default function TimeSpan({ start, end, id, description, active, dayName, isOwner, deleteTimespan }: TimeSpanProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [typingMessage, setTypingMessage] = useState(false)
 
@@ -52,7 +54,7 @@ export default function TimeSpan({ start, end, id, description, active, dayName 
       </Box>
     </Tooltip>
 
-    { /* Modal */}
+    { /* Timespan details modal */}
     <Popover
       id={popoverId}
       open={open}
@@ -88,13 +90,18 @@ export default function TimeSpan({ start, end, id, description, active, dayName 
         <Divider></Divider>
         <CardActions>
           {
-            typingMessage ?
-              <>
-                <Button onClick={() => setTypingMessage(false)} color="error">Cancel</Button>
-                <Button onClick={() => setTypingMessage(false)}>Send</Button>
-              </>
+            isOwner ?
+              <Button fullWidth onClick={() => deleteTimespan(id, dayName)} color="error">Delete</Button>
               :
-              <Button fullWidth onClick={() => setTypingMessage(true)}>Ask Something</Button>
+              (
+                typingMessage ?
+                  <>
+                    <Button onClick={() => setTypingMessage(false)} color="error">Cancel</Button>
+                    <Button onClick={() => setTypingMessage(false)}>Send</Button>
+                  </>
+                  :
+                  <Button fullWidth onClick={() => setTypingMessage(true)}>Ask Something</Button>
+              )
           }
         </CardActions>
       </Card>
