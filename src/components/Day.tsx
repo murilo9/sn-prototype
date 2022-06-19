@@ -30,7 +30,7 @@ export default function Day({ name, timeSpans, isOwner, setShowAddTimespanDialog
   return <>
     <div onMouseEnter={() => setShowOptions(true)} onMouseLeave={() => setShowOptions(false)} onClick={() => setShowOptions(false)}>
       <Box sx={{ position: 'relative', height: '32px', display: 'flex', alignItems: 'center' }}>
-        <Switch onChange={() => setActive(!active)} defaultChecked size='small' />
+        <Switch onChange={() => setActive(!active)} defaultChecked size='small' disabled={!isOwner} />
         <Typography variant='body2' sx={{ width: '48px', px: 2, display: 'inline-block', textAlign: 'center' }}>
           {name.substring(0, 3).toUpperCase()}
         </Typography>
