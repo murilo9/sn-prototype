@@ -2,7 +2,7 @@
   "name": "sports-network",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://murilo9.github.io",
+  "homepage": "https://murilo9.github.io/sn-prototype",
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
